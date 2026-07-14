@@ -1,0 +1,29 @@
+import java.util.*;
+
+class Solution {
+    public String removeDuplicates(String s) {
+
+        Stack<Character> stack = new Stack<>();
+
+        int n = s.length();
+
+        stack.push(s.charAt(n - 1));
+
+        for (int i = n - 2; i >= 0; i--) {
+
+            if (!stack.isEmpty() && stack.peek() == s.charAt(i)) {
+                stack.pop();
+            } else {
+                stack.push(s.charAt(i));
+            }
+        }
+
+        String ans = "";
+
+        while (!stack.isEmpty()) {
+            ans += stack.pop();
+        }
+
+        return ans;
+    }
+}

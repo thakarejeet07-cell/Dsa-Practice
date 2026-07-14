@@ -1,0 +1,19 @@
+import java.util.*;
+
+class Solution {
+    public int getDecimalValue(ListNode head) {
+        StringBuilder sb = new StringBuilder();
+        ListNode currNode = head;
+        while (currNode != null) {
+            sb.append(currNode.val);
+            currNode = currNode.next;
+        }
+        int number = 0;
+        int n = sb.length();
+        for (int i = 0; i < n; i++) {
+            int bit = sb.charAt(i) - '0';
+            number += Math.pow(2, n - 1 - i) * bit;
+        }
+        return number;
+    }
+}

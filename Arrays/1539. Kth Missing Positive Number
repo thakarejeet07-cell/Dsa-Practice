@@ -1,0 +1,22 @@
+class Solution {
+    public int findKthPositive(int[] arr, int k) {
+        for (int i = 0; i < arr.length; i++) {
+            if (i == 0) {
+                int numBefore = arr[i] - 1;
+                if (numBefore >= k) {
+                    return k;
+                } else {
+                    k = k - numBefore;
+                }
+            } else {
+                int numBet = arr[i] - arr[i - 1] - 1;
+                if (numBet >= k) {
+                    return arr[i - 1] + k;
+                } else {
+                    k = k - numBet;
+                }
+            }
+        }
+        return arr[arr.length - 1] + k;
+    }
+}
