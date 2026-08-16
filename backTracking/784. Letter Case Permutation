@@ -1,0 +1,38 @@
+import java.util.*;
+
+class Solution {
+    public List<String> letterCasePermutation(String s) {
+        List<String> ans = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
+
+        backtrack(s, 0, sb, ans);
+
+        return ans;
+    }
+
+    public void backtrack(String s, int index, StringBuilder sb, List<String> ans) {
+        if (index == s.length()) {
+            ans.add(sb.toString());
+            return;
+        }
+
+        char c = s.charAt(index);
+
+        if (Character.isLetter(c)) {
+
+            sb.append(Character.toLowerCase(c));
+            backtrack(s, index + 1, sb, ans);
+            sb.deleteCharAt(sb.length() - 1);
+
+            sb.append(Character.toUpperCase(c));
+            backtrack(s, index + 1, sb, ans);
+            sb.deleteCharAt(sb.length() - 1);
+
+        } else {
+
+            sb.append(c);
+            backtrack(s, index + 1, sb, ans);
+            sb.deleteCharAt(sb.length() - 1);
+        }
+    }
+}
