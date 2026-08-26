@@ -1,0 +1,18 @@
+import java.util*;
+
+class Solution {
+    public void generate(int n, String curr, List<String> result) {
+        
+    }
+
+
+    public static void main(String[] args){
+        int n = 3;
+        List<String> result = new ArrayList<>();
+        Solution.generate(n, "", result);
+        for (String s : result) {
+            System.out.print(s + " ");
+        }
+        System.out.println();
+    }
+}
