@@ -1,0 +1,21 @@
+class Solution {
+    public int countSubsequences(int[] nums, int k) {
+        return helper(nums, k, 0, 0);
+    }
+
+    public int helper(int[] nums, int k, int sum, int start) {
+        if(start == nums.length){
+            return sum == k ? 1 : 0; 
+        }
+        // include current element
+        int take = helper(nums, k, sum + nums[start], start + 1);
+
+        // exclude current element
+        int notTake = helper(nums, k, sum, start + 1);
+
+        return take + notTake;
+
+
+
+    }
+}

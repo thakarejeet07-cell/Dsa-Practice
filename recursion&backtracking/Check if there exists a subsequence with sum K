@@ -1,0 +1,14 @@
+class Solution {
+    public int cITEASWSK(int[] nums, int k) {
+        return helper(nums,k,0,0);
+    }
+
+    public int helper(int[] nums, int k, int sum, int start) {
+        if(start == nums.length){
+            return k == sum;
+        }
+        boolean take = helper(nums,k,sum + nums[start],start+1);
+        boolean notTake = helper(nums,k,sum,start+1);
+        return take || notTake;
+    }
+}
