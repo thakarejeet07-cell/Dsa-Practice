@@ -1,0 +1,22 @@
+class Solution {
+    public List<Integer> subsetSums(int[] nums) {
+        List<Integer> result = new ArrayList<>();
+
+        helper(nums, 0, 0, result);
+
+        Collections.sort(result);
+
+        return result;
+    }
+
+    public void helper(int[] nums, int start, int sum, List<Integer> result) {
+        if(start == nums.length){
+            result.add(sum);
+            return;
+        }
+
+        helper(nums,start+1,sum,result);
+        helper(nums,start+1,sum + nums[start],result);
+
+    }
+}
