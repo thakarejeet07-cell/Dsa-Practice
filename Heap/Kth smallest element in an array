@@ -1,0 +1,15 @@
+import java.util.*;
+
+class Solution {
+    PriorityQueue<Integer> pq;
+    public int findKthSmallest(int[] nums, int k) {
+        pq = new PriorityQueue<>(Collections.reverseOrder());
+        for(int ele : nums){
+            pq.add(ele);
+            if(pq.size() > k){
+                pq.poll();
+            }
+        }
+        return pq.poll();
+    }
+}

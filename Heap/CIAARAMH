@@ -1,0 +1,21 @@
+public class minHeapCheck{
+    public boolean minHeapCheck(int [] arr,int parent,int child){
+        if(child >= arr.length){
+            return true;
+        }
+        if(arr[parent] > arr[child]){
+            return false;
+        }
+        boolean leftCheck = minHeapCheck(arr,child,2*child+1);
+        boolean rightCheck = minHeapCheck(arr,child,2*child+2);
+        return leftCheck && rightCheck;
+    }
+    public static void main( String [] args){
+        int [] arr = {10, 20, 30, 21, 23};
+        minHeapCheck obj = new minHeapCheck();
+        boolean result1 = minHeapCheck(arr,0,1);
+        boolean result2 = minHeapCheck(arr,0,2);
+        System.out.println(result1 && result2);
+
+    }
+}

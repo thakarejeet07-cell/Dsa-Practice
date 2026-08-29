@@ -1,0 +1,22 @@
+import java.util.*;
+
+class Solution {
+    public void sortKSortedArray(int[] arr, int k) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+
+        int index = 0;
+
+        for (int i = 0; i < arr.length; i++) {
+            pq.add(arr[i]);
+
+            if (pq.size() > k) {
+                arr[index] = pq.poll();
+                index++;
+            }
+        }
+        while (!pq.isEmpty()) {
+            arr[index] = pq.poll();
+            index++;
+        }
+    }
+}
