@@ -1,0 +1,54 @@
+import java.util.*;
+
+class Solution {
+    public boolean isNStraightHand(int[] hand, int groupSize) {
+
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        for (int ele : hand) {
+            map.put(ele, map.getOrDefault(ele, 0) + 1);
+        }
+
+        List<Map.Entry<Integer, Integer>> list =
+                new ArrayList<>(map.entrySet());
+
+        list.sort((a, b) -> a.getKey() - b.getKey());
+
+        int done = 0;
+
+        while (done < list.size()) {
+
+   
+            while (done < list.size() &&
+                   list.get(done).getValue() == 0) {
+                done++;
+            }
+
+            if (done == list.size()) {
+                return true;
+            }
+
+
+            for (int i = done; i < done + groupSize; i++) {
+
+                if (i >= list.size()) {
+                    return false;
+                }
+
+                if (list.get(i).getKey() !=
+                    list.get(done).getKey() + (i - done)) {
+                    return false;
+                }
+
+                if (list.get(i).getValue() > 0) {
+                    list.get(i).setValue(
+                        list.get(i).getValue() - 1
+                    );
+                } else {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}

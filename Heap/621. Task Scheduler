@@ -1,0 +1,39 @@
+import java.util.*;
+
+class Solution {
+    public int leastInterval(char[] tasks, int n) {
+
+        HashMap<Character, Integer> map = new HashMap<>();
+
+        for (char ele : tasks) {
+            map.put(ele, map.getOrDefault(ele, 0) + 1);
+        }
+
+        List<Map.Entry<Character, Integer>> list =
+                new ArrayList<>(map.entrySet());
+
+        list.sort((a, b) -> b.getValue() - a.getValue());
+
+        int time = 0;
+        while(list.get(0).getValue() > 0){
+            int cycle = n+1;
+            int done = 0;
+            for(int i=0;i<list.size() && cycle>0;i++){
+                if(list.get(i).getValue() > 0){
+                    list.get(i).setValue(list.get(i).getValue() - 1);
+                    cycle--;
+                    done++;
+                }
+            }
+            if (list.get(0).getValue() == 0) {
+                time += done;
+            } else {
+                time += done + cycle;
+            }
+            list.sort((a,b) -> b.getValue() - a.getValue());
+        }
+        return time;
+    }
+}
+
+
