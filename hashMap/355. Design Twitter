@@ -1,0 +1,64 @@
+import java.util.*;
+
+class Tweet{
+    int tweetId;
+    int timestamp;
+    Tweet(int tweetId,int timestamp){
+        this.tweetId = tweetId;
+        this.timestamp = timestamp;
+    }
+}
+
+class Twitter {
+    HashMap<Integer, HashSet<Integer>> map;
+    List<List<Tweet>> list;
+    int timestamp;
+
+    public Twitter() {
+        map = new HashMap<>();
+        list = new ArrayList<>();
+        for (int i = 0; i < 500; i++) {
+            list.add(new ArrayList<>());
+        }
+
+        timestamp = 0;
+    }
+    
+    public void postTweet(int userId, int tweetId) {
+        timestamp++;
+        Tweet t = new Tweet(tweetId, timestamp);
+        list.get(userId).add(t);
+    }
+    
+    public List<Integer> getNewsFeed(int userId) {
+        PriorityQueue<Tweet> pq =
+    new PriorityQueue<>((a, b) -> b.timestamp - a.timestamp);
+        List<Integer> ans = new ArrayList<>();
+        for (Tweet t : list.get(userId)) {
+            pq.add(t);
+        }
+        if(map.containsKey(userId)){
+            for(int ele : map.get(userId)){
+                for(Tweet t : list.get(ele)){
+                    pq.add(t);
+                }
+            }
+        }
+        while (!pq.isEmpty() && ans.size() < 10) {
+            ans.add(pq.poll().tweetId);
+        }
+        return ans;
+
+    }
+    
+    public void follow(int followerId, int followeeId) {
+        map.putIfAbsent(followerId, new HashSet<>());
+        map.get(followerId).add(followeeId);
+    }
+    
+    public void unfollow(int followerId, int followeeId) {
+        if (map.containsKey(followerId)) {
+            map.get(followerId).remove(followeeId);
+    }
+}
+}
