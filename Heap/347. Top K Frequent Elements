@@ -1,0 +1,40 @@
+import java.util.*;
+
+class Pair implements Comparable<Pair> {
+    int ele;
+    int freq;
+    Pair(int ele,int freq){
+        this.ele = ele;
+        this.freq = freq;
+    }
+
+    @Override
+    public int compareTo(Pair other) {
+        if(this.freq == other.freq){
+            return this.ele - other.ele;
+        }
+        return this.freq - other.freq;
+    }
+}
+
+class Solution {
+    public int[] topKFrequent(int[] nums, int k) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        PriorityQueue<Pair> pq = new PriorityQueue<>();
+
+        for(int ele : nums){
+            map.put(ele, map.getOrDefault(ele, 0) + 1);
+        }
+        for(Map.Entry<Integer,Integer> entry : map.entrySet()){
+            pq.add(new Pair(entry.getKey(),entry.getValue()));
+            if(pq.size() > k){
+                pq.poll();
+            }
+        }
+        int[] ans = new int [k];
+        for(int i=0;i<k;i++){
+            ans[i] = pq.poll().ele;
+        }
+return ans;
+    }
+}
