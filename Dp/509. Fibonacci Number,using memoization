@@ -5,8 +5,7 @@ class Solution {
         if(dp[n] != 0){
             return dp[n];
         }
-        int ans = fib(n-1) + fib(n-2);
-        return ans;
+        return dp[n] = fib(n-1) + fib(n-2);
     }
    
 
