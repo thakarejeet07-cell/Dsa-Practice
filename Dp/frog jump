@@ -1,0 +1,14 @@
+import java.util.*;
+
+class Solution {
+    Static int[] dp;
+    public int frogJump(int[] heights) {
+        dp = new int[heights.length-1];
+        return helper(0,heights[0]);
+    }
+    public int helper(int start,int cost){
+        int oneStep = helper(start+1,cost+Math.abs(heights[start]-heights[start+1]));
+        int twoStep = helper(start+2,cost+Math.abs(heights[start]-heights[start+2]));
+        return Math.min(oneStep,twoStep);
+    }
+}
