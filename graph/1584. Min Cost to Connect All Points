@@ -1,0 +1,44 @@
+import java.util.*;
+
+class Solution {
+    public int minCostConnectPoints(int[][] points) {
+        int n = points.length;
+        int[][] graph = new int[n][n];
+
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                graph[i][j] = Math.abs(points[i][0] - points[j][0]) 
+                            + Math.abs(points[i][1] - points[j][1]);
+            }
+        }
+
+
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[0] - b[0]);
+        boolean[] visited = new boolean[n];
+
+        pq.add(new int[]{0, 0});
+        int total = 0;
+
+        while (!pq.isEmpty()) {
+            int[] curr = pq.poll();
+            int cost = curr[0];
+            int u = curr[1];
+
+            if (visited[u]) {
+                continue;
+            }
+
+            visited[u] = true;
+            total += cost;
+
+            for (int v = 0; v < n; v++) {
+                if (u != v && !visited[v]) {
+                    pq.add(new int[]{graph[u][v], v});
+                }
+            }
+        }
+
+        return total;
+    }
+}
