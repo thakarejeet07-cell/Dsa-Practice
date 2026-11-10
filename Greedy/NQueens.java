@@ -10,7 +10,6 @@ public class NQueens {
         System.out.print("Enter chessboard size (N): ");
         int n = scanner.nextInt();
         scanner.close();
-
         solveNQueens(n);
     }
 
